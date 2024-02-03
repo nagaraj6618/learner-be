@@ -6,6 +6,9 @@ app.get('/',(req,res) => {
 
    res.status(200).json({message : "Server Working"})
 })
+app.get('/api/v1',(req,res)=> {
+   res.status(200).json({message : "Server Working..."})
+})
 
 
 app.listen(PORT,() => console.log(`Server Running at http://localhost:${PORT}`))

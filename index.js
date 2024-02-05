@@ -7,7 +7,7 @@ const cors = require('cors')
 //import routes
 const auth = require('./routes/auth.js');
 const book = require('./routes/slotbook.js')
-
+const MONGO_DB_URL = "mongodb://127.0.0.1/learners"
 // importing dotenv
 require('dotenv').config()
 
@@ -20,7 +20,7 @@ const corsOptions = {
 mongoose.set('strictQuery',false)
 const connect = async () => {
    try {
-     await mongoose.connect(process.env.MONGO_DB_URL, {
+     await mongoose.connect(MONGO_DB_URL, {
        useNewUrlParser: true,
        useUnifiedTopology: true
      })
@@ -37,6 +37,9 @@ const connect = async () => {
  //for verification
 app.get('/',(req,res) => {
    res.status(200).json({message : "Server Working"})
+})
+app.get('/api/v1',(req,res) => {
+  res.status(200).json({message : "Server Working..."})
 })
 
 //routes

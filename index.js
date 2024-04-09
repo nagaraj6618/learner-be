@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const cookieParser = require('cookie-parser');
 //import routes
 const auth = require('./routes/auth.js');
 const book = require('./routes/slotbook.js')
@@ -48,8 +49,8 @@ app.get('/api/v1/db',(req,res) => {
 //routes
 
 
-app.use(express.json())
-
+app.use(express.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));

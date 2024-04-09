@@ -56,10 +56,10 @@ app.use(cors(corsOptions));
 
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/booking',book)
-
+connect();
 app.listen(PORT,() => { 
    console.log(`Server Running at http://localhost:${PORT}`)
-   connect();
+   
 })
 
 module.exports = app;

@@ -2,7 +2,7 @@ const express = require('express');
 const PORT = 8000;
 const app = express();
 const mongoose = require('mongoose');
-
+const bodyParser = require('body-parser')
 const cors = require('cors')
 //import routes
 const auth = require('./routes/auth.js');
@@ -50,8 +50,8 @@ app.get('/api/v1/db',(req,res) => {
 
 app.use(express.json())
 
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors(corsOptions));
 
 app.use('/api/v1/auth',auth);

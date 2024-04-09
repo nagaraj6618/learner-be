@@ -8,7 +8,7 @@ const cors = require('cors')
 const auth = require('./routes/auth.js');
 const book = require('./routes/slotbook.js')
 
-
+let dbChecking = "Not connected"
 require('dotenv').config()
 
 const corsOptions = {
@@ -25,11 +25,12 @@ const connect = async () => {
        useUnifiedTopology: true
      })
      console.log("MongoDb databse connected")
- 
+     dbChecking = "connected DB";
    }
    catch (err) {
      console.log(err)
      console.log('Mongodb database Connection failed')
+     dbChecking = "Failed";
    }
  
  }
@@ -41,7 +42,9 @@ app.get('/',(req,res) => {
 app.get('/api/v1',(req,res) => {
   res.status(200).json({message : "Server Working..."})
 })
-
+app.get('/api/v1/db',(req,res) => {
+  res.status(200).json({message:dbChecking})
+})
 //routes
 
 

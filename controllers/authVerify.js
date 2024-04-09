@@ -18,8 +18,7 @@ const verifyToken = (token) => {
 }
 const verifyAdmin = (req,res,next) => {
    const user = verifyToken(req.cookies.accessToken);
-   console.log(user);
-   console.log(req.cookies.accessToken)
+
    if(user && user.role === 'admin'){
       next()
    }
@@ -31,7 +30,7 @@ const verifyUser = (req,res,next) => {
    const user = verifyToken(req.cookies.accessToken);
    console.log(user);
    console.log(req.cookies.accessToken)
-   if(user && user.role === 'user'){
+   if(user && (user.role === 'user' || user.role === 'admin')){
       next()
    }
    else{

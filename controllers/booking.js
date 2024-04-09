@@ -1,7 +1,36 @@
 const Slot = require('../models/Slot.js');
+const jwt = require('jsonwebtoken')
+
+
+const verifyToken = (token) => {
+   let reqUser = null;
+   console.log(process.env.JWT_SECRET_KEY)
+   if(!token){
+      return null;
+   }
+   
+   jwt.verify(token,process.env.JWT_SECRET_KEY,(err,user) => {
+      
+      if(err){
+         return null
+      }
+      reqUser = user;
+   })
+   
+   return reqUser;
+}
 
 const slotBooking = async (req, res) => {
-   const newBooking = new Slot(req.body);
+   const {date,time,examtype} = req.body;
+   const user = verifyToken(req.cookies.accessToken);
+   const postData = {
+      username:user.id,
+      date:date,
+      time:time,
+      examtype:examtype
+   };
+   console.log(postData)
+   const newBooking = new Slot(postData);
    try {
       const date = req.body.date;
       const time = req.body.time;
@@ -40,7 +69,7 @@ const getAllSlotBooking = async (req, res) => {
 const getSlotBooked = async (req, res) => {
    const id = req.params.id
    try {
-      const slotbook = await Slot.findById(id);
+      const slotbook = await Slot.find({username:id});
       res.status(200).json({ status: true, message: "Get Slot", data: slotbook });
    }
    catch (err) {

@@ -5,8 +5,8 @@ const { verifyAdmin, verifyUser } = require('../controllers/authVerify.js');
 
 
 router.get('/',verifyAdmin,getAllSlotBooking);
-router.delete('/',deleteAllBooked);
-router.get('/:id',getSlotBooked);
+router.delete('/',verifyUser,deleteAllBooked);
+router.get('/:id',verifyUser,getSlotBooked);
 router.delete('/:id',deleteSlotBooked);
 router.post('/',verifyUser,slotBooking);
 module.exports = router

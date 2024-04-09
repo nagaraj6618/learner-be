@@ -2,13 +2,13 @@ const express = require('express');
 const PORT = 8000;
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+
 const cors = require('cors')
 //import routes
 const auth = require('./routes/auth.js');
 const book = require('./routes/slotbook.js')
 
-// importing dotenv
+
 require('dotenv').config()
 
 const corsOptions = {
@@ -47,15 +47,16 @@ app.get('/api/v1',(req,res) => {
 
 app.use(express.json())
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(cors(corsOptions))
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+app.use(cors(corsOptions));
+
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/booking',book)
+
 app.listen(PORT,() => { 
    console.log(`Server Running at http://localhost:${PORT}`)
    connect();
-
 })
 
-module.exports = app
+module.exports = app;

@@ -1,7 +1,7 @@
-const {login,register} = require('../controllers/authController.js')
+
 
 const express = require('express')
-
+const {login,register} = require('../controllers/authController.js')
 const router = express.Router();
 
 router.post('/login',login);

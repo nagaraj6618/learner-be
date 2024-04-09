@@ -25,6 +25,7 @@ const slotBooking = async (req, res) => {
 }
 
 const getAllSlotBooking = async (req, res) => {
+   res.status(200).json({ status: false, message: "Empty" });
    try {
       const getAllBookedSlot = await Slot.find();
       if (!getAllBookedSlot) {

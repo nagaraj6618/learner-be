@@ -28,8 +28,11 @@ const login = async (req, res) => {
         }
       );
       res.cookie('accessToken', token, {
-         // httpOnly: true,
-         expires: token.expiresIn
+         httpOnly: true,
+         secure: true,
+         sameSite: 'None',
+         expires: new Date(Date.now() + 3600000),
+         
        }).status(200).json({ token, success: true, message: "successfully login", data: { ...rest }, role })
       
    }

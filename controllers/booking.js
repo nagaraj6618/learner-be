@@ -22,10 +22,11 @@ const verifyToken = (token) => {
 }
 
 const slotBooking = async (req, res) => {
-   const {date,time,examtype} = req.body;
-   const user = verifyToken(req.cookies.accessToken);
+   const {date,time,examtype,username,name} = req.body;
+   // const user = verifyToken(req.headers.authorization);
    const postData = {
-      username:user.id,
+      username:username,
+      name:name,
       date:date,
       time:time,
       examtype:examtype
@@ -35,8 +36,8 @@ const slotBooking = async (req, res) => {
    try {
       const date = req.body.date;
       const time = req.body.time;
-      const bookedSlot = await Slot.find({ date: date });
-      const bookedSlot1 = await Slot.find({ time: time, date: date })
+      const bookedSlot = await Slot.find({ date: date,username:username });
+      const bookedSlot1 = await Slot.find({ time: time, date: date ,username:username})
 
       if (bookedSlot.length < 2 && bookedSlot1.length < 1) {
 

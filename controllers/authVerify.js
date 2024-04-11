@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 const verifyToken = (token) => {
+   
    let reqUser = null;
-   console.log(process.env.JWT_SECRET_KEY)
+  
    if(!token){
       return null;
    }
@@ -17,8 +18,8 @@ const verifyToken = (token) => {
    return reqUser;
 }
 const verifyAdmin = (req,res,next) => {
-   const user = verifyToken(req.cookies.accessToken);
-
+   const user = verifyToken(req.headers.authorization);
+   
    if(user && user.role === 'admin'){
       next()
    }
@@ -27,9 +28,9 @@ const verifyAdmin = (req,res,next) => {
    }
 }
 const verifyUser = (req,res,next) => {
-   const user = verifyToken(req.cookies.accessToken);
-   console.log(user);
-   console.log(req.cookies.accessToken)
+   const user = verifyToken(req.headers.authorization);
+   // console.log(user);
+   // console.log(req.headers.authorization)
    if(user && (user.role === 'user' || user.role === 'admin')){
       next()
    }

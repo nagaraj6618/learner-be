@@ -15,6 +15,7 @@ const verifyToken = (token) => {
          return null
       }
       reqUser = user;
+      
    })
    
    return reqUser;

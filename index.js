@@ -13,8 +13,8 @@ let dbChecking = "Not connected"
 require('dotenv').config()
 
 const corsOptions = {
-   origin: true,
-   credentials: true
+  origin: true,
+  credentials: true,
  }
 
 //databse Connection
@@ -48,12 +48,12 @@ app.get('/api/v1/db',(req,res) => {
 })
 //routes
 
-
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors(corsOptions));
+
 
 app.use('/api/v1/auth',auth);
 app.use('/api/v1/booking',book)

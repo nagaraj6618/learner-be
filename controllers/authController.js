@@ -24,11 +24,11 @@ const login = async (req, res) => {
         },
         process.env.JWT_SECRET_KEY,
         {
-          expiresIn: "1d"
+          expiresIn: "1h"
         }
       );
       res.cookie('accessToken', token, {
-         httpOnly: true,
+         // httpOnly: true,
          expires: token.expiresIn
        }).status(200).json({ token, success: true, message: "successfully login", data: { ...rest }, role })
       

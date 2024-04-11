@@ -31,8 +31,6 @@ const login = async (req, res) => {
       {
 
          httpOnly: true,
-         secure: true,
-         sameSite: 'None',
          expires: new Date(Date.now() + 3600000),
          
        }).status(200).json({ token, success: true, message: "successfully login", data: { ...rest }, role })

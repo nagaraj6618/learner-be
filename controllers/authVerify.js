@@ -30,7 +30,7 @@ const verifyAdmin = (req,res,next) => {
 const verifyUser = (req,res,next) => {
    const user = verifyToken(req.headers.authorization);
    // console.log(user);
-   // console.log(req.headers.authorization)
+   console.log(req.headers.authorization)
    if(user && (user.role === 'user' || user.role === 'admin')){
       next()
    }

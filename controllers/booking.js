@@ -113,4 +113,20 @@ const deleteAllBooked = async (req, res) => {
 
 }
 
-module.exports = { slotBooking, getAllSlotBooking, getSlotBooked, deleteSlotBooked, deleteAllBooked }
+const updateExamStatus = async(req,res) => {
+   const id = req.params.id;
+   const {examstatus} = req.body;
+   try{
+      const updateExam = await Slot.findByIdAndUpdate(id , {examstatus:examstatus},{new:true});
+      if(!updateExam){
+         return res.status(404).send("Not Updated")
+      }
+      res.status(200).json({data:updateExam});
+   }
+   catch(error){
+      res.status(500).json({message:"Server Error"})
+   }
+   
+}
+
+module.exports = { slotBooking, getAllSlotBooking, getSlotBooked, deleteSlotBooked, deleteAllBooked,updateExamStatus }

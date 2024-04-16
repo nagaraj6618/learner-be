@@ -30,6 +30,10 @@ const slotScheme = new mongoose.Schema({
    examstatus : {
       default:"pending",
       type:String
+   },
+   examlocation : {
+      type:String,
+      required:true,
    }
 })
 

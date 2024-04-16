@@ -22,14 +22,15 @@ const verifyToken = (token) => {
 }
 
 const slotBooking = async (req, res) => {
-   const {date,time,examtype,username,name} = req.body;
+   const {date,time,examtype,username,name,examlocation} = req.body;
    // const user = verifyToken(req.headers.authorization);
    const postData = {
       username:username,
       name:name,
       date:date,
       time:time,
-      examtype:examtype
+      examtype:examtype,
+      examlocation:examlocation,
    };
    console.log(postData)
    const newBooking = new Slot(postData);
@@ -128,5 +129,22 @@ const updateExamStatus = async(req,res) => {
    }
    
 }
+const updateExamStatusByJsonData = async(req,res) => {
+   
+   const {filteredData} =req.body;
+   console.log(filteredData)
+   try{
+      const result = filteredData.map(
+         async (data) => {
+            await Slot.findByIdAndUpdate(data.id,{examstatus:data.status},{new:true});
+         }
+      )
+      res.status(200).json({data:"Updated"})
+   }
+   catch(err){
+      res.status(500).json({data:"Not Updated"})
+   }
+   // res.send("Working..")
+}
 
-module.exports = { slotBooking, getAllSlotBooking, getSlotBooked, deleteSlotBooked, deleteAllBooked,updateExamStatus }
+module.exports = { slotBooking, getAllSlotBooking, getSlotBooked, deleteSlotBooked, deleteAllBooked,updateExamStatus ,updateExamStatusByJsonData}
